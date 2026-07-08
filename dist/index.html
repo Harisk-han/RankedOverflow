@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rank Overflow — Rank Higher. Grow Faster.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" crossorigin href="/assets/index-DmcStNE0.css">
+</head>
+<body>
+
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav id="mainNav">
+    <a href="#home" class="nav-logo">
+      <span class="nav-logo-dot"></span>Rank<span style="color:var(--accent)">Overflow</span>
+    </a>
+    <div class="nav-links">
+      <a href="#home" data-page="home">Home</a>
+      <a href="#services" data-page="services">Services</a>
+      <a href="#casestudies" data-page="casestudies">Case Studies</a>
+      <a href="#about" data-page="about">About Us</a>
+      <a href="#contact" data-page="contact">Contact</a>
+      <a href="#score" data-page="score" class="nav-cta">Get My Score →</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" data-page="home" onclick="toggleMenu()">Home</a>
+    <a href="#services" data-page="services" onclick="toggleMenu()">Services</a>
+    <a href="#casestudies" data-page="casestudies" onclick="toggleMenu()">Case Studies</a>
+    <a href="#about" data-page="about" onclick="toggleMenu()">About Us</a>
+    <a href="#contact" data-page="contact" onclick="toggleMenu()">Contact</a>
+    <a href="#score" data-page="score" onclick="toggleMenu()" style="color:var(--accent);font-weight:700;">Get My Score →</a>
+  </div>
+
+  <!-- ═══════════ DYNAMIC CONTENT HOLDER ═══════════ -->
+  <main id="content"></main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo"><span style="color:var(--accent);margin-right:2px">●</span> Rank<span style="color:var(--accent)">Overflow</span></div>
+          <p class="footer-desc">Europe's results-driven SEO agency. We help businesses rank higher, grow faster, and win more customers through organic search.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="#services" onclick="showPage('services')">Technical SEO</a></li>
+            <li><a href="#services" onclick="showPage('services')">Content Strategy</a></li>
+            <li><a href="#services" onclick="showPage('services')">Link Building</a></li>
+            <li><a href="#services" onclick="showPage('services')">Local SEO</a></li>
+            <li><a href="#services" onclick="showPage('services')">E-commerce SEO</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#about" onclick="showPage('about')">About Us</a></li>
+            <li><a href="#casestudies" onclick="showPage('casestudies')">Case Studies</a></li>
+            <li><a href="#contact" onclick="showPage('contact')">Contact</a></li>
+            <li><a href="#score" onclick="showPage('score')">Get My Score</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:hello@rankoverflow.com">hello@rankoverflow.com</a></li>
+            <li><a href="tel:+923001234567">+92 300 1234567</a></li>
+            <li><a href="#contact" onclick="showPage('contact')">Blue Area, Islamabad</a></li>
+          </ul>
+          <div style="margin-top:1.5rem">
+            <a href="#score" class="btn btn-primary" onclick="showPage('score')">Get Free Score</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Rank Overflow. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social">in</a>
+          <a href="#" class="footer-social">𝕏</a>
+          <a href="#" class="footer-social">f</a>
+          <a href="#" class="footer-social">▶</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SPA Router Script -->
+  <script src="js/app.js"></script>
+</body>
+</html>
