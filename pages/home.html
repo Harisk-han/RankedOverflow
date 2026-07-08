@@ -1,34 +1,68 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
-  <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <span class="hero-eyebrow-dot"></span>
-      <span>Europe's Results-Driven SEO Agency</span>
+  <div class="hero-grid-split">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        <span>Europe's Results-Driven SEO Agency</span>
+      </div>
+      <h1>Rank Higher.<br><em>Grow Faster.</em><br>Win More.</h1>
+      <p class="hero-sub">Rank Overflow turns underperforming websites into organic growth machines. Data-driven strategies, measurable results, zero fluff.</p>
+      <div class="hero-quick-audit">
+        <input type="url" id="heroAuditUrl" placeholder="Enter your website (e.g. www.yoursite.com)">
+        <button class="btn-submit" onclick="triggerHeroAudit()">
+          <span>Scan Free</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">139<span>k+</span></div><div class="hero-stat-label">Total Impressions</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">98<span>%</span></div><div class="hero-stat-label">Desktop Performance</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">82<span>%</span></div><div class="hero-stat-label">Mobile Speed Gain</div></div>
+      </div>
     </div>
-    <h1>Rank Higher.<br><em>Grow Faster.</em><br>Win More.</h1>
-    <p class="hero-sub">Rank Overflow turns underperforming websites into organic growth machines. Data-driven strategies, measurable results, zero fluff.</p>
-    <div class="hero-actions">
-      <a href="#score" class="btn btn-primary btn-lg" onclick="showPage('score')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        Get My Free Score
-      </a>
-      <a href="#casestudies" class="btn btn-white btn-lg" onclick="showPage('casestudies')">View Case Studies</a>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-num">139<span>k+</span></div><div class="hero-stat-label">Total Impressions Driven</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">3<span>+</span></div><div class="hero-stat-label">Happy Clients</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">98</div><div class="hero-stat-label">Desktop Perf. Score Achieved</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">82<span>%</span></div><div class="hero-stat-label">Mobile Speed Improvement</div></div>
+    <div class="hero-right">
+      <div class="hero-dashboard">
+        <div class="dashboard-header">
+          <div class="dashboard-title">
+            <span class="dashboard-title-dot"></span>
+            <span>Live GSC Organic Data</span>
+          </div>
+          <span class="dashboard-time">Real-time tracking</span>
+        </div>
+        <div class="dashboard-grid">
+          <div class="dashboard-mini-card">
+            <div class="dashboard-mini-label">Organic Clicks</div>
+            <div class="dashboard-mini-val">12,480 <span>↑ 48%</span></div>
+          </div>
+          <div class="dashboard-mini-card">
+            <div class="dashboard-mini-label">Average CTR</div>
+            <div class="dashboard-mini-val">4.2% <span>↑ 1.2%</span></div>
+          </div>
+        </div>
+        <div class="dashboard-chart">
+          <div class="chart-pulse"></div>
+          <svg class="chart-svg" viewBox="0 0 300 100">
+            <defs>
+              <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.3"></stop>
+                <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+            <path class="chart-path" fill="url(#chartGlow)" stroke="var(--accent)" stroke-width="3" d="M0,80 Q30,60 60,70 T120,40 T180,50 T240,20 T300,10 L300,100 L0,100 Z"></path>
+            <path class="chart-path" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" d="M0,80 Q30,60 60,70 T120,40 T180,50 T240,20 T300,10"></path>
+          </svg>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="hero-scroll"><span>Scroll</span><div class="hero-scroll-line"></div></div>
 </section>
 
 <!-- TRUSTED BY -->
 <div class="trusted">
   <div class="trusted-inner">
-    <span class="trusted-label">Trusted by</span>
+    <span class="trusted-label">Trusted by brands in NL & BE</span>
     <div class="trusted-logos">
       <span class="trusted-logo">BOLDPERFORMANCE.NL</span>
       <span class="trusted-logo">GETSAVAGE.NL</span>
@@ -46,32 +80,32 @@
       <p>We don't sell keywords. We engineer growth systems that compound over time and deliver measurable ROI.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card fade-up">
+      <div class="service-card-premium fade-up">
         <div class="service-icon">🔍</div>
         <h3>Technical SEO</h3>
         <p>Deep-dive audits, crawl optimization, Core Web Vitals, structured data — we fix the foundation first.</p>
       </div>
-      <div class="service-card fade-up">
+      <div class="service-card-premium fade-up">
         <div class="service-icon">📝</div>
         <h3>Content Strategy</h3>
         <p>Topical authority mapping, content gap analysis, and search-intent-led copy that converts visitors.</p>
       </div>
-      <div class="service-card fade-up">
+      <div class="service-card-premium fade-up">
         <div class="service-icon">🔗</div>
         <h3>Link Acquisition</h3>
         <p>White-hat link building from real, high-authority publishers that move your domain rating up.</p>
       </div>
-      <div class="service-card fade-up">
+      <div class="service-card-premium fade-up">
         <div class="service-icon">🌍</div>
         <h3>Local SEO</h3>
         <p>Google Business, local citations, hyperlocal content — dominate your city's search results.</p>
       </div>
-      <div class="service-card fade-up">
+      <div class="service-card-premium fade-up">
         <div class="service-icon">📊</div>
         <h3>SEO Analytics</h3>
         <p>Custom dashboards, attribution modeling, and monthly reporting with actionable insight — not vanity metrics.</p>
       </div>
-      <div class="service-card fade-up">
+      <div class="service-card-premium fade-up">
         <div class="service-icon">🛒</div>
         <h3>E-commerce SEO</h3>
         <p>Product page optimization, faceted navigation, schema markup, and category architecture that sells.</p>
@@ -92,19 +126,19 @@
         <h2>Most agencies report.<br>We deliver.</h2>
         <div class="why-points">
           <div class="why-point">
-            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke="#00c472" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
+            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
             <div class="why-point-text"><h4>ROI-First Mindset</h4><p>Every strategy we build ties back to revenue. Rankings without conversions are just vanity numbers.</p></div>
           </div>
           <div class="why-point">
-            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke="#00c472" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
+            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
             <div class="why-point-text"><h4>Transparent Reporting</h4><p>Real-time dashboard access, monthly strategy calls, full transparency — always.</p></div>
           </div>
           <div class="why-point">
-            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke="#00c472" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
+            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
             <div class="why-point-text"><h4>No Lock-In Contracts</h4><p>We earn your business every month. If you're not seeing results, you're free to walk.</p></div>
           </div>
           <div class="why-point">
-            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke="#00c472" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
+            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
             <div class="why-point-text"><h4>Dedicated SEO Strategists</h4><p>No junior account managers. A senior strategist owns your account from day one.</p></div>
           </div>
         </div>
@@ -112,25 +146,39 @@
           <a href="#about" class="btn btn-primary" onclick="showPage('about')">Meet Our Team →</a>
         </div>
       </div>
-      <div class="why-visual">
-        <div class="metric-card">
-          <div class="metric-label">Total Impressions (boldperformance.nl)</div>
-          <div class="metric-val">85.6k <span>↑ 3-month GSC</span></div>
-          <div class="metric-bar-wrap"><div class="metric-bar" style="width:86%"></div></div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Mobile Page Speed (getsavage.nl)</div>
-          <div class="metric-val">45 → 82 <span>↑ after work</span></div>
-          <div class="metric-bar-wrap"><div class="metric-bar" style="width:82%;animation-delay:.3s"></div></div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Desktop Page Speed (getsavage.nl)</div>
-          <div class="metric-val">89 → 98 <span>↑ after work</span></div>
-          <div class="metric-bar-wrap"><div class="metric-bar" style="width:98%;animation-delay:.6s"></div></div>
-        </div>
-        <div style="text-align:center;margin-top:1.5rem">
-          <a href="#score" class="btn btn-white" onclick="showPage('score')">🎯 Get Your Score Report</a>
-        </div>
+      <div class="why-comparison">
+        <div class="why-comparison-header">Typical Client Performance Gains</div>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Metric Target</th>
+              <th>Before</th>
+              <th>With Rank Overflow</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="comp-metric-name">Google Page Speed Index (Mobile)</td>
+              <td class="comp-val-before">45 / 100</td>
+              <td class="comp-val-after">82 / 100</td>
+            </tr>
+            <tr>
+              <td class="comp-metric-name">Desktop Speed Performance</td>
+              <td class="comp-val-before">68 / 100</td>
+              <td class="comp-val-after">98 / 100</td>
+            </tr>
+            <tr>
+              <td class="comp-metric-name">Core Web Vitals Pass Rate</td>
+              <td class="comp-val-before">Failing</td>
+              <td class="comp-val-after">100% Passed</td>
+            </tr>
+            <tr>
+              <td class="comp-metric-name">Monthly GSC Impressions</td>
+              <td class="comp-val-before">1.2k</td>
+              <td class="comp-val-after">85.6k (↑ 70x)</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -143,29 +191,29 @@
       <span class="tag">How It Works</span>
       <h2>From Zero to Ranking in 4 Steps</h2>
     </div>
-    <div class="process-steps">
-      <div class="process-step">
-        <div class="step-num">01</div>
+    <div class="process-steps-timeline">
+      <div class="process-step-timeline">
+        <div class="step-num-bubble">01</div>
         <h4>Free Score Audit</h4>
         <p>We analyze your site's SEO health, technical issues, and competitive gaps in depth.</p>
       </div>
-      <div class="process-step">
-        <div class="step-num">02</div>
+      <div class="process-step-timeline">
+        <div class="step-num-bubble">02</div>
         <h4>Custom Roadmap</h4>
         <p>A 90-day growth plan tailored to your industry, goals, and competitive landscape.</p>
       </div>
-      <div class="process-step">
-        <div class="step-num">03</div>
+      <div class="process-step-timeline">
+        <div class="step-num-bubble">03</div>
         <h4>Execute & Build</h4>
         <p>Our team implements technical fixes, content, and link acquisition at scale.</p>
       </div>
-      <div class="process-step">
-        <div class="step-num">04</div>
+      <div class="process-step-timeline">
+        <div class="step-num-bubble">04</div>
         <h4>Measure & Grow</h4>
         <p>Monthly reporting, iteration, and compounding growth that builds real business value.</p>
       </div>
     </div>
-    <div class="text-center" style="margin-top:2.5rem">
+    <div class="text-center" style="margin-top:3.5rem">
       <a href="#score" class="btn btn-primary btn-lg" onclick="showPage('score')">Start With a Free Score →</a>
     </div>
   </div>
@@ -180,7 +228,7 @@
       <p>Real businesses. Real rankings. Real revenue.</p>
     </div>
     <div class="testimonials-grid">
-      <div class="testimonial-card">
+      <div class="testimonial-card-staggered">
         <div class="testimonial-stars">★★★★★</div>
         <p class="testimonial-text">"Rankflow took us from page 6 to position #1 for our main keyword in under 5 months. Our monthly leads tripled. Best investment we've made."</p>
         <div class="testimonial-author">
@@ -188,7 +236,7 @@
           <div class="author-info"><strong>Ahmed K.</strong><span>CEO, Nova Tech Solutions</span></div>
         </div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card-staggered" style="transform: translateY(1.5rem);">
         <div class="testimonial-stars">★★★★★</div>
         <p class="testimonial-text">"We saw a 280% increase in organic revenue in 6 months. Their content strategy is unlike anything we'd seen before — data-driven and genuinely creative."</p>
         <div class="testimonial-author">
@@ -196,7 +244,7 @@
           <div class="author-info"><strong>Sara R.</strong><span>Head of Marketing, Apex Retail</span></div>
         </div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card-staggered">
         <div class="testimonial-stars">★★★★★</div>
         <p class="testimonial-text">"Transparent, accountable, and they actually deliver. The dashboard alone is worth it — I know exactly what's happening at all times."</p>
         <div class="testimonial-author">
@@ -209,8 +257,8 @@
 </section>
 
 <!-- CTA BAND -->
-<section class="cta-band">
-  <div class="container">
+<section class="section container">
+  <div class="cta-card-floating">
     <h2>Ready to See Where You Stand?</h2>
     <p>Get a free, expert-led Website Performance Score — SEO health, technical audit, and conversion analysis. No strings attached.</p>
     <a href="#score" class="btn btn-white btn-lg" onclick="showPage('score')">
