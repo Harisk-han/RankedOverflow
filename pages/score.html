@@ -1,0 +1,143 @@
+<section class="score-hero">
+  <div class="score-hero-inner">
+    <div class="container">
+      <span class="tag" style="color:var(--accent)">Free Website Performance Score</span>
+      <h1>Find Out Exactly<br>Why You're Not Ranking</h1>
+      <p>Get a comprehensive, expert-led assessment of your website's SEO health, technical performance, and conversion readiness — delivered within 48 hours. Free. No strings attached.</p>
+
+      <div class="score-includes">
+        <div class="score-include-item">
+          <div class="score-include-icon">🔧</div>
+          <h4>Technical Health</h4>
+          <p>Crawl errors, speed, structured data, mobile readiness</p>
+        </div>
+        <div class="score-include-item">
+          <div class="score-include-icon">📈</div>
+          <h4>SEO Opportunity</h4>
+          <p>Keyword gaps, ranking potential, content analysis</p>
+        </div>
+        <div class="score-include-item">
+          <div class="score-include-icon">🔗</div>
+          <h4>Authority Assessment</h4>
+          <p>Backlink profile, domain rating, competitor gap</p>
+        </div>
+        <div class="score-include-item">
+          <div class="score-include-icon">💰</div>
+          <h4>Conversion Readiness</h4>
+          <p>UX bottlenecks, CTA effectiveness, landing pages</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="score-form-section">
+  <div class="container">
+    <div class="score-form-wrap" id="scoreFormWrap">
+      <span class="tag">Your Free Score</span>
+      <h2>Request Your Website Performance Score</h2>
+      <p>Takes 2 minutes. Our team does the rest. You'll receive a detailed PDF report with prioritized recommendations.</p>
+      <div class="score-steps">
+        <div class="score-step done" id="step-bar-1"></div>
+        <div class="score-step active" id="step-bar-2"></div>
+        <div class="score-step" id="step-bar-3"></div>
+      </div>
+
+      <div id="scoreFormContent" style="display:block">
+        <div class="form-group">
+          <label>Your Website URL *</label>
+          <input type="url" id="scoreUrl" placeholder="https://www.yourwebsite.com" oninput="updateScoreStep()">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Full Name *</label>
+            <input type="text" id="scoreName" placeholder="Ahmed Khan">
+          </div>
+          <div class="form-group">
+            <label>Business Email *</label>
+            <input type="email" id="scoreEmail" placeholder="ahmed@company.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Industry / Business Type *</label>
+          <select id="scoreIndustry">
+            <option value="">Select your industry...</option>
+            <option>E-Commerce / Retail</option>
+            <option>SaaS / Technology</option>
+            <option>Healthcare</option>
+            <option>Real Estate</option>
+            <option>Education</option>
+            <option>Finance & Legal</option>
+            <option>Travel & Hospitality</option>
+            <option>Local Services</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Biggest SEO Challenge Right Now</label>
+          <select>
+            <option value="">Select one...</option>
+            <option>Not ranking for target keywords</option>
+            <option>Traffic is declining</option>
+            <option>Traffic exists but no conversions</option>
+            <option>Just launched, need to start ranking</option>
+            <option>Lost rankings after a Google update</option>
+            <option>Not sure — that's why I'm here</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Monthly Organic Traffic (approx.)</label>
+          <select>
+            <option value="">Select range...</option>
+            <option>0 – 500 visits/mo</option>
+            <option>500 – 2,000 visits/mo</option>
+            <option>2,000 – 10,000 visits/mo</option>
+            <option>10,000 – 50,000 visits/mo</option>
+            <option>50,000+ visits/mo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Anything specific you want us to focus on? (optional)</label>
+          <textarea placeholder="e.g. our product pages aren't ranking, we recently migrated to a new domain, we want to target Dubai market..."></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;font-size:1.05rem;" onclick="submitScoreForm()">
+          🎯 Send Me My Free Score
+        </button>
+        <p style="text-align:center; font-size:.8rem; color:var(--muted); margin-top:1rem;">✓ Delivered within 48 hours &nbsp;&nbsp; ✓ 100% free &nbsp;&nbsp; ✓ No sales calls unless you want one</p>
+      </div>
+
+      <div class="form-success" id="scoreSuccess">
+        <div class="form-success-icon">🎯</div>
+        <h3>Your Score Request is In!</h3>
+        <p>We've received your submission. Our team will analyze your website and deliver a comprehensive PDF report to your inbox within <strong>48 hours</strong>.</p>
+        <p style="margin-top:1rem;">In the meantime, explore our <a href="#casestudies" onclick="showPage('casestudies')" style="color:var(--accent);font-weight:600; text-decoration:none;">case studies</a> to see what's possible.</p>
+      </div>
+    </div>
+
+    <!-- What you get -->
+    <div style="max-width:720px; margin:3rem auto 0; display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;">
+      <div style="background:#fff; border:1px solid var(--border); border-radius:16px; padding:1.5rem;">
+        <div style="font-size:1.5rem; margin-bottom:.6rem">📄</div>
+        <h4 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:.4rem; font-size:1rem;">Detailed PDF Report</h4>
+        <p style="font-size:.85rem; color:var(--muted);">A structured, scored assessment of your website across SEO, technical, and CRO dimensions.</p>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-radius:16px; padding:1.5rem;">
+        <div style="font-size:1.5rem; margin-bottom:.6rem">🎯</div>
+        <h4 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:.4rem; font-size:1rem;">Prioritized Action List</h4>
+        <p style="font-size:.85rem; color:var(--muted);">Quick wins and long-term plays ranked by impact — so you know exactly what to fix first.</p>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-radius:16px; padding:1.5rem;">
+        <div style="font-size:1.5rem; margin-bottom:.6rem">📊</div>
+        <h4 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:.4rem; font-size:1rem;">Competitor Snapshot</h4>
+        <p style="font-size:.85rem; color:var(--muted);">See how your site stacks up against your top 3 organic competitors in your niche.</p>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-radius:16px; padding:1.5rem;">
+        <div style="font-size:1.5rem; margin-bottom:.6rem">💬</div>
+        <h4 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:.4rem; font-size:1rem;">Optional Strategy Call</h4>
+        <p style="font-size:.85rem; color:var(--muted);">Want to walk through the report together? Book a free 30-min call with a senior strategist.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
