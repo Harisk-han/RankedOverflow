@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get My Score — Rank Overflow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <style>
+:root {
+  --ink: #0a0a0f;
+  --ink-soft: #1c1c28;
+  --surface: #f5f4f0;
+  --surface-warm: #eeeae2;
+  --white: #ffffff;
+  --accent: #ff4d1c;
+  --accent-hover: #e03d10;
+  --accent-glow: rgba(255,77,28,0.18);
+  --green: #00c472;
+  --blue: #1a56ff;
+  --muted: #7a7a8c;
+  --border: rgba(10,10,15,0.1);
+  --card-bg: #ffffff;
+  --nav-h: 72px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4, h5 {
+  font-family: 'Syne', sans-serif;
+  line-height: 1.1;
+}
+h1 {
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  font-weight: 800;
+}
+h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+}
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 700;
+}
+p {
+  line-height: 1.7;
+  color: #3a3a4a;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  background: rgba(245, 244, 240, 0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+nav.scrolled {
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  margin-left: auto;
+  align-items: center;
+}
+.nav-links a {
+  font-size: .92rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--accent);
+}
+.nav-cta {
+  background: var(--accent);
+  color: #fff !important;
+  padding: .5rem 1.2rem;
+  border-radius: 100px;
+  font-weight: 600 !important;
+  transition: background .2s, transform .15s !important;
+}
+.nav-cta:hover {
+  background: var(--accent-hover) !important;
+  transform: translateY(-1px);
+}
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  margin-left: auto;
+  display: none;
+}
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  transition: .3s;
+  display: block;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  z-index: 999;
+  padding: 1.5rem 5%;
+  flex-direction: column;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu a {
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 1.05rem;
+  padding: .5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu.open {
+  display: flex;
+}
+
+/* ── PAGES ── */
+.page {
+  padding-top: var(--nav-h);
+  min-height: 100vh;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .75rem 1.75rem;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: .95rem;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all .2s;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+.btn-outline:hover {
+  background: var(--ink);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn-white {
+  background: #fff;
+  color: var(--ink);
+}
+.btn-white:hover {
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+.btn-lg {
+  padding: 1rem 2.2rem;
+  font-size: 1.05rem;
+}
+.btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── SECTION SHELL ── */
+.section {
+  padding: 5rem 5%;
+}
+.section-sm {
+  padding: 3rem 5%;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.tag {
+  display: inline-block;
+  font-family: 'Syne', sans-serif;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border-radius: 100px;
+  padding: .3rem .85rem;
+  margin-bottom: 1rem;
+}
+
+/* Section headers */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section-header h2 {
+  margin-bottom: .8rem;
+}
+.section-header p {
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Utility */
+.text-center {
+  text-align: center;
+}
+.mt-2 {
+  margin-top: 2rem;
+}
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1rem 0;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  padding: 4rem 5% 2rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer-brand {}
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.footer-desc {
+  font-size: .88rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+  max-width: 260px;
+}
+.footer-col h5 {
+  font-family: 'Syne', sans-serif;
+  color: #fff;
+  font-size: .9rem;
+  margin-bottom: 1.2rem;
+}
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+.footer-col ul li a {
+  font-size: .87rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: .2s;
+}
+.footer-col ul li a:hover {
+  color: #fff;
+}
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-bottom p {
+  font-size: .82rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+}
+.footer-social {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-size: .85rem;
+  transition: .2s;
+}
+.footer-social:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .6s, transform .6s;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ═══════════════════════════════════
+   GET MY SCORE PAGE
+═══════════════════════════════════ */
+.score-hero {
+  background: var(--ink);
+  padding: 5rem 5% 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.score-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(255, 77, 28, 0.2) 0%, transparent 60%);
+}
+.score-hero-inner {
+  position: relative;
+  z-index: 2;
+}
+.score-hero h1 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.score-hero p {
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 580px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+.score-includes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin: 3rem 0;
+}
+.score-include-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.score-include-icon {
+  font-size: 1.8rem;
+  margin-bottom: .8rem;
+}
+.score-include-item h4 {
+  font-family: 'Syne', sans-serif;
+  color: #fff;
+  font-size: .95rem;
+  margin-bottom: .4rem;
+}
+.score-include-item p {
+  font-size: .8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+.score-form-section {
+  padding: 5rem 5%;
+}
+.score-form-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 28px;
+  padding: 3rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.07);
+}
+.score-form-wrap h2 {
+  margin-bottom: .5rem;
+}
+.score-form-wrap > p {
+  color: var(--muted);
+  margin-bottom: 2rem;
+  font-size: .92rem;
+}
+.score-steps {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 2.5rem;
+}
+.score-step {
+  flex: 1;
+  height: 4px;
+  border-radius: 100px;
+  background: var(--surface-warm);
+}
+.score-step.done {
+  background: var(--accent);
+}
+.score-step.active {
+  background: linear-gradient(90deg, var(--accent), rgba(255, 77, 28, 0.4));
+}
+
+/* ── RESPONSIVE MEDIA QUERIES ── */
+@media(max-width: 900px) {
+  .why-grid, .about-story, .contact-grid, .case-card, .service-row {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .service-row.reverse {
+    direction: ltr;
+  }
+  .case-card {
+    display: block;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero-stats {
+    gap: 2rem;
+  }
+}
+
+@media(max-width: 640px) {
+  .nav-links {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav id="mainNav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-dot"></span>Rank<span style="color:var(--accent)">Overflow</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-page="home">Home</a>
+      <a href="services.html" data-page="services">Services</a>
+      <a href="casestudies.html" data-page="casestudies">Case Studies</a>
+      <a href="about.html" data-page="about">About Us</a>
+      <a href="contact.html" data-page="contact">Contact</a>
+      <a href="score.html" data-page="score" class="nav-cta active" class="nav-cta active">Get My Score →</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-page="home" onclick="toggleMenu()">Home</a>
+    <a href="services.html" data-page="services" onclick="toggleMenu()">Services</a>
+    <a href="casestudies.html" data-page="casestudies" onclick="toggleMenu()">Case Studies</a>
+    <a href="about.html" data-page="about" onclick="toggleMenu()">About Us</a>
+    <a href="contact.html" data-page="contact" onclick="toggleMenu()">Contact</a>
+    <a href="score.html" data-page="score" class="nav-cta active" onclick="toggleMenu()" style="color:var(--accent);font-weight:700;">Get My Score →</a>
+  </div>
+
+  <!-- ═══════════ DYNAMIC CONTENT HOLDER ═══════════ -->
+  <main id="content">
+<section class="score-hero">
+  <div class="score-hero-inner">
+    <div class="container">
+      <span class="tag" style="color:var(--accent)">Free Website Performance Score</span>
+      <h1>Find Out Exactly<br>Why You're Not Ranking</h1>
+      <p>Get a comprehensive, expert-led assessment of your website's SEO health, technical performance, and conversion readiness — delivered within 48 hours. Free. No strings attached.</p>
+
+      <div class="score-includes">
+        <div class="score-include-item">
+          <div class="score-include-icon">🔧</div>
+          <h4>Technical Health</h4>
+          <p>Crawl errors, speed, structured data, mobile readiness</p>
+        </div>
+        <div class="score-include-item">
+          <div class="score-include-icon">📈</div>
+          <h4>SEO Opportunity</h4>
+          <p>Keyword gaps, ranking potential, content analysis</p>
+        </div>
+        <div class="score-include-item">
+          <div class="score-include-icon">🔗</div>
+          <h4>Authority Assessment</h4>
+          <p>Backlink profile, domain rating, competitor gap</p>
+        </div>
+        <div class="score-include-item">
+          <div class="score-include-icon">💰</div>
+          <h4>Conversion Readiness</h4>
+          <p>UX bottlenecks, CTA effectiveness, landing pages</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="score-form-section">
+  <div class="container">
+    <div class="score-form-wrap" id="scoreFormWrap">
+      <span class="tag">Your Free Score</span>
+      <h2>Request Your Website Performance Score</h2>
+      <p>Takes 2 minutes. Our team does the rest. You'll receive a detailed PDF report with prioritized recommendations.</p>
+      <div class="score-steps">
+        <div class="score-step done" id="step-bar-1"></div>
+        <div class="score-step active" id="step-bar-2"></div>
+        <div class="score-step" id="step-bar-3"></div>
+      </div>
+
+      <div id="scoreFormContent" style="display:block">
+        <div class="form-group">
+          <label>Your Website URL *</label>
+          <input type="url" id="scoreUrl" placeholder="https://www.yourwebsite.com" oninput="updateScoreStep()">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Full Name *</label>
+            <input type="text" id="scoreName" placeholder="Ahmed Khan">
+          </div>
+          <div class="form-group">
+            <label>Business Email *</label>
+            <input type="email" id="scoreEmail" placeholder="ahmed@company.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Industry / Business Type *</label>
+          <select id="scoreIndustry">
+            <option value="">Select your industry...</option>
+            <option>E-Commerce / Retail</option>
+            <option>SaaS / Technology</option>
+            <option>Healthcare</option>
+            <option>Real Estate</option>
+            <option>Education</option>
+            <option>Finance & Legal</option>
+            <option>Travel & Hospitality</option>
+            <option>Local Services</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Biggest SEO Challenge Right Now</label>
+          <select>
+            <option value="">Select one...</option>
+            <option>Not ranking for target keywords</option>
+            <option>Traffic is declining</option>
+            <option>Traffic exists but no conversions</option>
+            <option>Just launched, need to start ranking</option>
+            <option>Lost rankings after a Google update</option>
+            <option>Not sure — that's why I'm here</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Monthly Organic Traffic (approx.)</label>
+          <select>
+            <option value="">Select range...</option>
+            <option>0 – 500 visits/mo</option>
+            <option>500 – 2,000 visits/mo</option>
+            <option>2,000 – 10,000 visits/mo</option>
+            <option>10,000 – 50,000 visits/mo</option>
+            <option>50,000+ visits/mo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Anything specific you want us to focus on? (optional)</label>
+          <textarea placeholder="e.g. our product pages aren't ranking, we recently migrated to a new domain, we want to target Dubai market..."></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;font-size:1.05rem;" onclick="submitScoreForm()">
+          🎯 Send Me My Free Score
+        </button>
+        <p style="text-align:center; font-size:.8rem; color:var(--muted); margin-top:1rem;">✓ Delivered within 48 hours &nbsp;&nbsp; ✓ 100% free &nbsp;&nbsp; ✓ No sales calls unless you want one</p>
+      </div>
+
+      <div class="form-success" id="scoreSuccess">
+        <div class="form-success-icon">🎯</div>
+        <h3>Your Score Request is In!</h3>
+        <p>We've received your submission. Our team will analyze your website and deliver a comprehensive PDF report to your inbox within <strong>48 hours</strong>.</p>
+        <p style="margin-top:1rem;">In the meantime, explore our <a href="casestudies.html" style="color:var(--accent);font-weight:600; text-decoration:none;">case studies</a> to see what's possible.</p>
+      </div>
+    </div>
+
+    <!-- What you get -->
+    <div style="max-width:720px; margin:3rem auto 0; display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;">
+      <div style="background:#fff; border:1px solid var(--border); border-radius:16px; padding:1.5rem;">
+        <div style="font-size:1.5rem; margin-bottom:.6rem">📄</div>
+        <h4 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:.4rem; font-size:1rem;">Detailed PDF Report</h4>
+        <p style="font-size:.85rem; color:var(--muted);">A structured, scored assessment of your website across SEO, technical, and CRO dimensions.</p>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-radius:16px; padding:1.5rem;">
+        <div style="font-size:1.5rem; margin-bottom:.6rem">🎯</div>
+        <h4 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:.4rem; font-size:1rem;">Prioritized Action List</h4>
+        <p style="font-size:.85rem; color:var(--muted);">Quick wins and long-term plays ranked by impact — so you know exactly what to fix first.</p>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-radius:16px; padding:1.5rem;">
+        <div style="font-size:1.5rem; margin-bottom:.6rem">📊</div>
+        <h4 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:.4rem; font-size:1rem;">Competitor Snapshot</h4>
+        <p style="font-size:.85rem; color:var(--muted);">See how your site stacks up against your top 3 organic competitors in your niche.</p>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-radius:16px; padding:1.5rem;">
+        <div style="font-size:1.5rem; margin-bottom:.6rem">💬</div>
+        <h4 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:.4rem; font-size:1rem;">Optional Strategy Call</h4>
+        <p style="font-size:.85rem; color:var(--muted);">Want to walk through the report together? Book a free 30-min call with a senior strategist.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo"><span style="color:var(--accent);margin-right:2px">●</span> Rank<span style="color:var(--accent)">Overflow</span></div>
+          <p class="footer-desc">Europe's results-driven SEO agency. We help businesses rank higher, grow faster, and win more customers through organic search.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="services.html" >Technical SEO</a></li>
+            <li><a href="services.html" >Content Strategy</a></li>
+            <li><a href="services.html" >Link Building</a></li>
+            <li><a href="services.html" >Local SEO</a></li>
+            <li><a href="services.html" >E-commerce SEO</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html" >About Us</a></li>
+            <li><a href="casestudies.html" >Case Studies</a></li>
+            <li><a href="contact.html" >Contact</a></li>
+            <li><a href="score.html" >Get My Score</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:hello@rankoverflow.com">hello@rankoverflow.com</a></li>
+            <li><a href="tel:+923001234567">+92 300 1234567</a></li>
+            <li><a href="contact.html" >Blue Area, Islamabad</a></li>
+          </ul>
+          <div style="margin-top:1.5rem">
+            <a href="score.html" class="btn btn-primary" >Get Free Score</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Rank Overflow. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social">in</a>
+          <a href="#" class="footer-social">𝕏</a>
+          <a href="#" class="footer-social">f</a>
+          <a href="#" class="footer-social">▶</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SPA Router Script -->
+  <script>
+
+// Hamburger menu toggle
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  if (menu) {
+    menu.classList.toggle('open');
+  }
+}
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('mainNav');
+  if (nav) {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }
+});
+
+// Fade ups on scroll
+function initFadeUps() {
+  setTimeout(() => {
+    const els = document.querySelectorAll('#content .fade-up');
+    if (els.length === 0) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    els.forEach(el => observer.observe(el));
+  }, 100);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initFadeUps();
+});
+
+
+
+function updateScoreStep() {
+  const url = document.getElementById('scoreUrl').value;
+  const step2 = document.getElementById('step-bar-2');
+  const step3 = document.getElementById('step-bar-3');
+  
+  if (url.length > 5) {
+    if (step2) {
+      step2.classList.add('done');
+      step2.classList.remove('active');
+    }
+    if (step3) {
+      step3.classList.add('active');
+    }
+  }
+}
+
+function submitScoreForm() {
+  const formContent = document.getElementById('scoreFormContent');
+  const successBox = document.getElementById('scoreSuccess');
+  const step3 = document.getElementById('step-bar-3');
+
+  if (formContent) formContent.style.display = 'none';
+  if (successBox) successBox.classList.add('visible');
+  if (step3) {
+    step3.classList.add('done');
+    step3.classList.remove('active');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const urlParam = params.get('url');
+  if (urlParam) {
+    const scoreUrlInput = document.getElementById('scoreUrl');
+    if (scoreUrlInput) {
+      scoreUrlInput.value = urlParam;
+      updateScoreStep();
+    }
+  }
+});
+
+</script>
+</body>
+</html>

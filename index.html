@@ -8,24 +8,1067 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheets -->
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/pages.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+:root {
+  --ink: #0a0a0f;
+  --ink-soft: #1c1c28;
+  --surface: #f5f4f0;
+  --surface-warm: #eeeae2;
+  --white: #ffffff;
+  --accent: #ff4d1c;
+  --accent-hover: #e03d10;
+  --accent-glow: rgba(255,77,28,0.18);
+  --green: #00c472;
+  --blue: #1a56ff;
+  --muted: #7a7a8c;
+  --border: rgba(10,10,15,0.1);
+  --card-bg: #ffffff;
+  --nav-h: 72px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4, h5 {
+  font-family: 'Syne', sans-serif;
+  line-height: 1.1;
+}
+h1 {
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  font-weight: 800;
+}
+h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+}
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 700;
+}
+p {
+  line-height: 1.7;
+  color: #3a3a4a;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  background: rgba(245, 244, 240, 0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+nav.scrolled {
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  margin-left: auto;
+  align-items: center;
+}
+.nav-links a {
+  font-size: .92rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--accent);
+}
+.nav-cta {
+  background: var(--accent);
+  color: #fff !important;
+  padding: .5rem 1.2rem;
+  border-radius: 100px;
+  font-weight: 600 !important;
+  transition: background .2s, transform .15s !important;
+}
+.nav-cta:hover {
+  background: var(--accent-hover) !important;
+  transform: translateY(-1px);
+}
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  margin-left: auto;
+  display: none;
+}
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  transition: .3s;
+  display: block;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  z-index: 999;
+  padding: 1.5rem 5%;
+  flex-direction: column;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu a {
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 1.05rem;
+  padding: .5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu.open {
+  display: flex;
+}
+
+/* ── PAGES ── */
+.page {
+  padding-top: var(--nav-h);
+  min-height: 100vh;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .75rem 1.75rem;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: .95rem;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all .2s;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+.btn-outline:hover {
+  background: var(--ink);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn-white {
+  background: #fff;
+  color: var(--ink);
+}
+.btn-white:hover {
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+.btn-lg {
+  padding: 1rem 2.2rem;
+  font-size: 1.05rem;
+}
+.btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── SECTION SHELL ── */
+.section {
+  padding: 5rem 5%;
+}
+.section-sm {
+  padding: 3rem 5%;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.tag {
+  display: inline-block;
+  font-family: 'Syne', sans-serif;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border-radius: 100px;
+  padding: .3rem .85rem;
+  margin-bottom: 1rem;
+}
+
+/* Section headers */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section-header h2 {
+  margin-bottom: .8rem;
+}
+.section-header p {
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Utility */
+.text-center {
+  text-align: center;
+}
+.mt-2 {
+  margin-top: 2rem;
+}
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1rem 0;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  padding: 4rem 5% 2rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer-brand {}
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.footer-desc {
+  font-size: .88rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+  max-width: 260px;
+}
+.footer-col h5 {
+  font-family: 'Syne', sans-serif;
+  color: #fff;
+  font-size: .9rem;
+  margin-bottom: 1.2rem;
+}
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+.footer-col ul li a {
+  font-size: .87rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: .2s;
+}
+.footer-col ul li a:hover {
+  color: #fff;
+}
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-bottom p {
+  font-size: .82rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+}
+.footer-social {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-size: .85rem;
+  transition: .2s;
+}
+.footer-social:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .6s, transform .6s;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ═══════════════════════════════════
+   HOME PAGE
+═══════════════════════════════════ */
+.hero {
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 5% 5rem;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 70% 30%, rgba(255, 77, 28, 0.15) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 50% at 10% 80%, rgba(26, 86, 255, 0.08) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-grid-split {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Hero Left */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.hero-left h1 {
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+}
+.hero-left h1 em {
+  color: var(--accent);
+  font-style: normal;
+}
+.hero-left .hero-sub {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 520px;
+  margin: 0 0 2.5rem 0;
+  line-height: 1.6;
+}
+.hero-quick-audit {
+  display: flex;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px;
+  border-radius: 100px;
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.hero-quick-audit:focus-within {
+  border-color: rgba(255, 77, 28, 0.4);
+  box-shadow: 0 12px 32px var(--accent-glow);
+}
+.hero-quick-audit input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 0 1.2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem;
+}
+.hero-quick-audit input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.hero-quick-audit .btn-submit {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s, transform 0.15s;
+}
+.hero-quick-audit .btn-submit:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+.hero-quick-audit .btn-submit svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  padding: .4rem 1rem .4rem .6rem;
+  margin-bottom: 2rem;
+}
+.hero-eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+.hero-eyebrow span {
+  font-size: .8rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: .6;
+    transform: scale(1.3);
+  }
+}
+.hero-stats {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: flex-start;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.hero-stat {
+  text-align: left;
+}
+.hero-stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+}
+.hero-stat-num span {
+  color: var(--accent);
+}
+.hero-stat-label {
+  font-size: .8rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: .1rem;
+}
+
+/* Hero Right & Dashboard Graphic */
+.hero-right {
+  position: relative;
+  width: 100%;
+}
+.hero-dashboard {
+  background: var(--ink-soft);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 24px;
+  padding: 1.8rem;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.8rem;
+}
+.dashboard-title {
+  font-family: 'Syne', sans-serif;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dashboard-title-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+}
+.dashboard-time {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.dashboard-mini-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 0.8rem 1rem;
+}
+.dashboard-mini-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+.dashboard-mini-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+}
+.dashboard-mini-val span {
+  color: var(--green);
+  font-size: 0.8rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  margin-left: 2px;
+}
+.dashboard-chart {
+  width: 100%;
+  height: 120px;
+  position: relative;
+  margin-top: 1rem;
+}
+.chart-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.chart-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawChart 2.5s ease-out forwards;
+}
+@keyframes drawChart {
+  to { stroke-dashoffset: 0; }
+}
+.chart-pulse {
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  box-shadow: 0 0 10px var(--accent);
+  animation: pulseGlow 1.5s infinite alternate;
+}
+@keyframes pulseGlow {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1.3); opacity: 1; }
+}
+
+/* Trusted by */
+.trusted {
+  background: var(--surface-warm);
+  padding: 2.2rem 5%;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.trusted-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.trusted-label {
+  font-size: .8rem;
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+.trusted-logos {
+  display: flex;
+  gap: 3.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.trusted-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: .95rem;
+  color: #a09eb0;
+  letter-spacing: .06em;
+  transition: color 0.3s;
+}
+.trusted-logo:hover {
+  color: var(--ink);
+}
+
+/* Services preview premium cards */
+.service-card-premium {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  border: 1px solid rgba(10, 10, 15, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.01);
+}
+.service-card-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.service-card-premium:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(10, 10, 15, 0.08);
+  border-color: rgba(255, 77, 28, 0.15);
+}
+.service-card-premium:hover::before {
+  transform: scaleX(1);
+}
+.service-card-premium .service-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  transition: transform 0.3s ease;
+}
+.service-card-premium:hover .service-icon {
+  transform: scale(1.1) rotate(3deg);
+}
+.service-card-premium h3 {
+  margin-bottom: .8rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.service-card-premium p {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Why Section Redesign with Comparison */
+.why {
+  background: var(--ink);
+}
+.why .tag {
+  color: var(--accent);
+}
+.why h2 {
+  color: #fff;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.why-points {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  margin-top: 2rem;
+}
+.why-point {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+.why-check {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 196, 114, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: .1rem;
+}
+.why-check svg {
+  width: 14px;
+  height: 14px;
+  stroke: #00c472;
+}
+.why-point-text h4 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: .3rem;
+  font-size: 1.05rem;
+}
+.why-point-text p {
+  font-size: .9rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+}
+
+/* Comparison Metric Box */
+.why-comparison {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+.why-comparison-header {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.comparison-table th {
+  font-family: 'Syne', sans-serif;
+  text-align: left;
+  padding: 0.8rem 1rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.comparison-table td {
+  padding: 1.1rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+.comp-metric-name {
+  font-weight: 600;
+  color: #fff;
+}
+.comp-val-before {
+  color: #ff4d4d;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+.comp-val-after {
+  color: var(--green);
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-shadow: 0 0 10px rgba(0, 196, 114, 0.15);
+}
+
+/* Process Timeline Section */
+.process-steps-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 4.5rem;
+  position: relative;
+}
+.process-steps-timeline::before {
+  content: '';
+  position: absolute;
+  top: 44px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent) 0%, rgba(255, 77, 28, 0.15) 100%);
+  z-index: 1;
+}
+.process-step-timeline {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--surface-warm);
+  border-radius: 20px;
+  padding: 2.2rem 1.2rem 1.8rem;
+  border: 1px solid rgba(10, 10, 15, 0.04);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.process-step-timeline:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+}
+.step-num-bubble {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  box-shadow: 0 4px 10px rgba(255, 77, 28, 0.12);
+}
+.process-step-timeline h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.process-step-timeline p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Testimonials Staggered */
+.testimonials {
+  background: var(--surface-warm);
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3.5rem;
+  align-items: start;
+}
+.testimonial-card-staggered {
+  background: #fff;
+  border-radius: 20px;
+  padding: 2.2rem 2rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.02);
+  transition: transform 0.3s;
+}
+.testimonial-card-staggered:hover {
+  transform: translateY(-4px);
+}
+.testimonial-card-staggered .testimonial-stars {
+  color: var(--accent);
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+.testimonial-card-staggered .testimonial-text {
+  font-size: .92rem;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.testimonial-card-staggered .testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+
+/* Floating bottom CTA */
+.cta-card-floating {
+  background: linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.28);
+}
+.cta-card-floating::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 350px at 50% -120px, rgba(255, 77, 28, 0.12) 0%, transparent 100%);
+}
+.cta-card-floating h2 {
+  color: #fff;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+.cta-card-floating p {
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 580px;
+  margin: 0 auto 2.2rem;
+  font-size: 1rem;
+  position: relative;
+  z-index: 2;
+}
+.cta-card-floating .btn {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ── RESPONSIVE MEDIA QUERIES ── */
+@media(max-width: 900px) {
+  .why-grid, .about-story, .contact-grid, .case-card, .service-row {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .service-row.reverse {
+    direction: ltr;
+  }
+  .case-card {
+    display: block;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero-stats {
+    gap: 2rem;
+  }
+}
+
+@media(max-width: 640px) {
+  .nav-links {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+</style>
 </head>
 <body>
 
   <!-- ═══════════ NAV ═══════════ -->
   <nav id="mainNav">
-    <a href="#home" class="nav-logo">
+    <a href="index.html" class="nav-logo">
       <span class="nav-logo-dot"></span>Rank<span style="color:var(--accent)">Overflow</span>
     </a>
     <div class="nav-links">
-      <a href="#home" data-page="home">Home</a>
-      <a href="#services" data-page="services">Services</a>
-      <a href="#casestudies" data-page="casestudies">Case Studies</a>
-      <a href="#about" data-page="about">About Us</a>
-      <a href="#contact" data-page="contact">Contact</a>
-      <a href="#score" data-page="score" class="nav-cta">Get My Score →</a>
+      <a href="index.html" data-page="home" class="active active">Home</a>
+      <a href="services.html" data-page="services">Services</a>
+      <a href="casestudies.html" data-page="casestudies">Case Studies</a>
+      <a href="about.html" data-page="about">About Us</a>
+      <a href="contact.html" data-page="contact">Contact</a>
+      <a href="score.html" data-page="score" class="nav-cta">Get My Score →</a>
     </div>
     <div class="hamburger" onclick="toggleMenu()" id="hamburger">
       <span></span><span></span><span></span>
@@ -33,16 +1076,286 @@
   </nav>
   
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#home" data-page="home" onclick="toggleMenu()">Home</a>
-    <a href="#services" data-page="services" onclick="toggleMenu()">Services</a>
-    <a href="#casestudies" data-page="casestudies" onclick="toggleMenu()">Case Studies</a>
-    <a href="#about" data-page="about" onclick="toggleMenu()">About Us</a>
-    <a href="#contact" data-page="contact" onclick="toggleMenu()">Contact</a>
-    <a href="#score" data-page="score" onclick="toggleMenu()" style="color:var(--accent);font-weight:700;">Get My Score →</a>
+    <a href="index.html" data-page="home" class="active active" onclick="toggleMenu()">Home</a>
+    <a href="services.html" data-page="services" onclick="toggleMenu()">Services</a>
+    <a href="casestudies.html" data-page="casestudies" onclick="toggleMenu()">Case Studies</a>
+    <a href="about.html" data-page="about" onclick="toggleMenu()">About Us</a>
+    <a href="contact.html" data-page="contact" onclick="toggleMenu()">Contact</a>
+    <a href="score.html" data-page="score" onclick="toggleMenu()" style="color:var(--accent);font-weight:700;">Get My Score →</a>
   </div>
 
   <!-- ═══════════ DYNAMIC CONTENT HOLDER ═══════════ -->
-  <main id="content"></main>
+  <main id="content">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-grid-split">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        <span>Europe's Results-Driven SEO Agency</span>
+      </div>
+      <h1>Rank Higher.<br><em>Grow Faster.</em><br>Win More.</h1>
+      <p class="hero-sub">Rank Overflow turns underperforming websites into organic growth machines. Data-driven strategies, measurable results, zero fluff.</p>
+      <div class="hero-quick-audit">
+        <input type="url" id="heroAuditUrl" placeholder="Enter your website (e.g. www.yoursite.com)">
+        <button class="btn-submit" onclick="triggerHeroAudit()">
+          <span>Scan Free</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">139<span>k+</span></div><div class="hero-stat-label">Total Impressions</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">98<span>%</span></div><div class="hero-stat-label">Desktop Performance</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">82<span>%</span></div><div class="hero-stat-label">Mobile Speed Gain</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-dashboard">
+        <div class="dashboard-header">
+          <div class="dashboard-title">
+            <span class="dashboard-title-dot"></span>
+            <span>Live GSC Organic Data</span>
+          </div>
+          <span class="dashboard-time">Real-time tracking</span>
+        </div>
+        <div class="dashboard-grid">
+          <div class="dashboard-mini-card">
+            <div class="dashboard-mini-label">Organic Clicks</div>
+            <div class="dashboard-mini-val">12,480 <span>↑ 48%</span></div>
+          </div>
+          <div class="dashboard-mini-card">
+            <div class="dashboard-mini-label">Average CTR</div>
+            <div class="dashboard-mini-val">4.2% <span>↑ 1.2%</span></div>
+          </div>
+        </div>
+        <div class="dashboard-chart">
+          <div class="chart-pulse"></div>
+          <svg class="chart-svg" viewBox="0 0 300 100">
+            <defs>
+              <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.3"></stop>
+                <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+            <path class="chart-path" fill="url(#chartGlow)" stroke="var(--accent)" stroke-width="3" d="M0,80 Q30,60 60,70 T120,40 T180,50 T240,20 T300,10 L300,100 L0,100 Z"></path>
+            <path class="chart-path" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" d="M0,80 Q30,60 60,70 T120,40 T180,50 T240,20 T300,10"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED BY -->
+<div class="trusted">
+  <div class="trusted-inner">
+    <span class="trusted-label">Trusted by brands in NL & BE</span>
+    <div class="trusted-logos">
+      <span class="trusted-logo">BOLDPERFORMANCE.NL</span>
+      <span class="trusted-logo">GETSAVAGE.NL</span>
+      <span class="trusted-logo">QUALITYFIT.BE</span>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES PREVIEW -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag">What We Do</span>
+      <h2>SEO That Actually Moves the Needle</h2>
+      <p>We don't sell keywords. We engineer growth systems that compound over time and deliver measurable ROI.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card-premium fade-up">
+        <div class="service-icon">🔍</div>
+        <h3>Technical SEO</h3>
+        <p>Deep-dive audits, crawl optimization, Core Web Vitals, structured data — we fix the foundation first.</p>
+      </div>
+      <div class="service-card-premium fade-up">
+        <div class="service-icon">📝</div>
+        <h3>Content Strategy</h3>
+        <p>Topical authority mapping, content gap analysis, and search-intent-led copy that converts visitors.</p>
+      </div>
+      <div class="service-card-premium fade-up">
+        <div class="service-icon">🔗</div>
+        <h3>Link Acquisition</h3>
+        <p>White-hat link building from real, high-authority publishers that move your domain rating up.</p>
+      </div>
+      <div class="service-card-premium fade-up">
+        <div class="service-icon">🌍</div>
+        <h3>Local SEO</h3>
+        <p>Google Business, local citations, hyperlocal content — dominate your city's search results.</p>
+      </div>
+      <div class="service-card-premium fade-up">
+        <div class="service-icon">📊</div>
+        <h3>SEO Analytics</h3>
+        <p>Custom dashboards, attribution modeling, and monthly reporting with actionable insight — not vanity metrics.</p>
+      </div>
+      <div class="service-card-premium fade-up">
+        <div class="service-icon">🛒</div>
+        <h3>E-commerce SEO</h3>
+        <p>Product page optimization, faceted navigation, schema markup, and category architecture that sells.</p>
+      </div>
+    </div>
+    <div class="text-center mt-2">
+      <a href="services.html" class="btn btn-outline" onclick="showPage('services')">View All Services & Plans →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY RANKFLOW -->
+<section class="section why">
+  <div class="container">
+    <div class="why-grid">
+      <div>
+        <span class="tag">Why Rank Overflow</span>
+        <h2>Most agencies report.<br>We deliver.</h2>
+        <div class="why-points">
+          <div class="why-point">
+            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
+            <div class="why-point-text"><h4>ROI-First Mindset</h4><p>Every strategy we build ties back to revenue. Rankings without conversions are just vanity numbers.</p></div>
+          </div>
+          <div class="why-point">
+            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
+            <div class="why-point-text"><h4>Transparent Reporting</h4><p>Real-time dashboard access, monthly strategy calls, full transparency — always.</p></div>
+          </div>
+          <div class="why-point">
+            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
+            <div class="why-point-text"><h4>No Lock-In Contracts</h4><p>We earn your business every month. If you're not seeing results, you're free to walk.</p></div>
+          </div>
+          <div class="why-point">
+            <div class="why-check"><svg viewBox="0 0 14 14" fill="none" stroke-width="2.5"><polyline points="2 7 6 11 12 3"/></svg></div>
+            <div class="why-point-text"><h4>Dedicated SEO Strategists</h4><p>No junior account managers. A senior strategist owns your account from day one.</p></div>
+          </div>
+        </div>
+        <div style="margin-top:2rem">
+          <a href="about.html" class="btn btn-primary" onclick="showPage('about')">Meet Our Team →</a>
+        </div>
+      </div>
+      <div class="why-comparison">
+        <div class="why-comparison-header">Typical Client Performance Gains</div>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Metric Target</th>
+              <th>Before</th>
+              <th>With Rank Overflow</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="comp-metric-name">Google Page Speed Index (Mobile)</td>
+              <td class="comp-val-before">45 / 100</td>
+              <td class="comp-val-after">82 / 100</td>
+            </tr>
+            <tr>
+              <td class="comp-metric-name">Desktop Speed Performance</td>
+              <td class="comp-val-before">68 / 100</td>
+              <td class="comp-val-after">98 / 100</td>
+            </tr>
+            <tr>
+              <td class="comp-metric-name">Core Web Vitals Pass Rate</td>
+              <td class="comp-val-before">Failing</td>
+              <td class="comp-val-after">100% Passed</td>
+            </tr>
+            <tr>
+              <td class="comp-metric-name">Monthly GSC Impressions</td>
+              <td class="comp-val-before">1.2k</td>
+              <td class="comp-val-after">85.6k (↑ 70x)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" style="background:var(--surface-warm)">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag">How It Works</span>
+      <h2>From Zero to Ranking in 4 Steps</h2>
+    </div>
+    <div class="process-steps-timeline">
+      <div class="process-step-timeline">
+        <div class="step-num-bubble">01</div>
+        <h4>Free Score Audit</h4>
+        <p>We analyze your site's SEO health, technical issues, and competitive gaps in depth.</p>
+      </div>
+      <div class="process-step-timeline">
+        <div class="step-num-bubble">02</div>
+        <h4>Custom Roadmap</h4>
+        <p>A 90-day growth plan tailored to your industry, goals, and competitive landscape.</p>
+      </div>
+      <div class="process-step-timeline">
+        <div class="step-num-bubble">03</div>
+        <h4>Execute & Build</h4>
+        <p>Our team implements technical fixes, content, and link acquisition at scale.</p>
+      </div>
+      <div class="process-step-timeline">
+        <div class="step-num-bubble">04</div>
+        <h4>Measure & Grow</h4>
+        <p>Monthly reporting, iteration, and compounding growth that builds real business value.</p>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:3.5rem">
+      <a href="score.html" class="btn btn-primary btn-lg" onclick="showPage('score')">Start With a Free Score →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag">Client Results</span>
+      <h2>Don't Take Our Word For It</h2>
+      <p>Real businesses. Real rankings. Real revenue.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card-staggered">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Rankflow took us from page 6 to position #1 for our main keyword in under 5 months. Our monthly leads tripled. Best investment we've made."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#ff4d1c,#ff8c65)">AK</div>
+          <div class="author-info"><strong>Ahmed K.</strong><span>CEO, Nova Tech Solutions</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card-staggered" style="transform: translateY(1.5rem);">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"We saw a 280% increase in organic revenue in 6 months. Their content strategy is unlike anything we'd seen before — data-driven and genuinely creative."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#1a56ff,#5e8aff)">SR</div>
+          <div class="author-info"><strong>Sara R.</strong><span>Head of Marketing, Apex Retail</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card-staggered">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Transparent, accountable, and they actually deliver. The dashboard alone is worth it — I know exactly what's happening at all times."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#00c472,#00a05d)">MF</div>
+          <div class="author-info"><strong>Mohammed F.</strong><span>Founder, Orbita Co</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="section container">
+  <div class="cta-card-floating">
+    <h2>Ready to See Where You Stand?</h2>
+    <p>Get a free, expert-led Website Performance Score — SEO health, technical audit, and conversion analysis. No strings attached.</p>
+    <a href="score.html" class="btn btn-white btn-lg" onclick="showPage('score')">
+      🎯 Get My Free Score Now
+    </a>
+  </div>
+</section>
+
+</main>
 
   <!-- ═══════════ FOOTER ═══════════ -->
   <footer>
@@ -55,20 +1368,20 @@
         <div class="footer-col">
           <h5>Services</h5>
           <ul>
-            <li><a href="#services" onclick="showPage('services')">Technical SEO</a></li>
-            <li><a href="#services" onclick="showPage('services')">Content Strategy</a></li>
-            <li><a href="#services" onclick="showPage('services')">Link Building</a></li>
-            <li><a href="#services" onclick="showPage('services')">Local SEO</a></li>
-            <li><a href="#services" onclick="showPage('services')">E-commerce SEO</a></li>
+            <li><a href="services.html" >Technical SEO</a></li>
+            <li><a href="services.html" >Content Strategy</a></li>
+            <li><a href="services.html" >Link Building</a></li>
+            <li><a href="services.html" >Local SEO</a></li>
+            <li><a href="services.html" >E-commerce SEO</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h5>Company</h5>
           <ul>
-            <li><a href="#about" onclick="showPage('about')">About Us</a></li>
-            <li><a href="#casestudies" onclick="showPage('casestudies')">Case Studies</a></li>
-            <li><a href="#contact" onclick="showPage('contact')">Contact</a></li>
-            <li><a href="#score" onclick="showPage('score')">Get My Score</a></li>
+            <li><a href="about.html" >About Us</a></li>
+            <li><a href="casestudies.html" >Case Studies</a></li>
+            <li><a href="contact.html" >Contact</a></li>
+            <li><a href="score.html" >Get My Score</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -76,10 +1389,10 @@
           <ul>
             <li><a href="mailto:hello@rankoverflow.com">hello@rankoverflow.com</a></li>
             <li><a href="tel:+923001234567">+92 300 1234567</a></li>
-            <li><a href="#contact" onclick="showPage('contact')">Blue Area, Islamabad</a></li>
+            <li><a href="contact.html" >Blue Area, Islamabad</a></li>
           </ul>
           <div style="margin-top:1.5rem">
-            <a href="#score" class="btn btn-primary" onclick="showPage('score')">Get Free Score</a>
+            <a href="score.html" class="btn btn-primary" >Get Free Score</a>
           </div>
         </div>
       </div>
@@ -96,6 +1409,55 @@
   </footer>
 
   <!-- SPA Router Script -->
-  <script src="js/app.js"></script>
+  <script>
+
+// Hamburger menu toggle
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  if (menu) {
+    menu.classList.toggle('open');
+  }
+}
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('mainNav');
+  if (nav) {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }
+});
+
+// Fade ups on scroll
+function initFadeUps() {
+  setTimeout(() => {
+    const els = document.querySelectorAll('#content .fade-up');
+    if (els.length === 0) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    els.forEach(el => observer.observe(el));
+  }, 100);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initFadeUps();
+});
+
+
+
+function triggerHeroAudit() {
+  const urlInput = document.getElementById('heroAuditUrl');
+  if (urlInput && urlInput.value) {
+    window.location.href = 'score.html?url=' + encodeURIComponent(urlInput.value);
+  } else {
+    window.location.href = 'score.html';
+  }
+}
+
+</script>
 </body>
 </html>

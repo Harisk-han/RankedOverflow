@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Rank Overflow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <style>
+:root {
+  --ink: #0a0a0f;
+  --ink-soft: #1c1c28;
+  --surface: #f5f4f0;
+  --surface-warm: #eeeae2;
+  --white: #ffffff;
+  --accent: #ff4d1c;
+  --accent-hover: #e03d10;
+  --accent-glow: rgba(255,77,28,0.18);
+  --green: #00c472;
+  --blue: #1a56ff;
+  --muted: #7a7a8c;
+  --border: rgba(10,10,15,0.1);
+  --card-bg: #ffffff;
+  --nav-h: 72px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4, h5 {
+  font-family: 'Syne', sans-serif;
+  line-height: 1.1;
+}
+h1 {
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  font-weight: 800;
+}
+h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+}
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 700;
+}
+p {
+  line-height: 1.7;
+  color: #3a3a4a;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  background: rgba(245, 244, 240, 0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+nav.scrolled {
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  margin-left: auto;
+  align-items: center;
+}
+.nav-links a {
+  font-size: .92rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--accent);
+}
+.nav-cta {
+  background: var(--accent);
+  color: #fff !important;
+  padding: .5rem 1.2rem;
+  border-radius: 100px;
+  font-weight: 600 !important;
+  transition: background .2s, transform .15s !important;
+}
+.nav-cta:hover {
+  background: var(--accent-hover) !important;
+  transform: translateY(-1px);
+}
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  margin-left: auto;
+  display: none;
+}
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  transition: .3s;
+  display: block;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  z-index: 999;
+  padding: 1.5rem 5%;
+  flex-direction: column;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu a {
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 1.05rem;
+  padding: .5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu.open {
+  display: flex;
+}
+
+/* ── PAGES ── */
+.page {
+  padding-top: var(--nav-h);
+  min-height: 100vh;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .75rem 1.75rem;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: .95rem;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all .2s;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+.btn-outline:hover {
+  background: var(--ink);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn-white {
+  background: #fff;
+  color: var(--ink);
+}
+.btn-white:hover {
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+.btn-lg {
+  padding: 1rem 2.2rem;
+  font-size: 1.05rem;
+}
+.btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── SECTION SHELL ── */
+.section {
+  padding: 5rem 5%;
+}
+.section-sm {
+  padding: 3rem 5%;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.tag {
+  display: inline-block;
+  font-family: 'Syne', sans-serif;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border-radius: 100px;
+  padding: .3rem .85rem;
+  margin-bottom: 1rem;
+}
+
+/* Section headers */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section-header h2 {
+  margin-bottom: .8rem;
+}
+.section-header p {
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Utility */
+.text-center {
+  text-align: center;
+}
+.mt-2 {
+  margin-top: 2rem;
+}
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1rem 0;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  padding: 4rem 5% 2rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer-brand {}
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.footer-desc {
+  font-size: .88rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+  max-width: 260px;
+}
+.footer-col h5 {
+  font-family: 'Syne', sans-serif;
+  color: #fff;
+  font-size: .9rem;
+  margin-bottom: 1.2rem;
+}
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+.footer-col ul li a {
+  font-size: .87rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: .2s;
+}
+.footer-col ul li a:hover {
+  color: #fff;
+}
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-bottom p {
+  font-size: .82rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+}
+.footer-social {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-size: .85rem;
+  transition: .2s;
+}
+.footer-social:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .6s, transform .6s;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ═══════════════════════════════════
+   CONTACT PAGE
+═══════════════════════════════════ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 5rem;
+}
+.contact-info {}
+.contact-info h2 {
+  margin-bottom: 1rem;
+}
+.contact-info p {
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+.contact-detail-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--surface-warm);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.contact-detail-text strong {
+  display: block;
+  font-size: .85rem;
+  font-weight: 600;
+}
+.contact-detail-text span {
+  font-size: .85rem;
+  color: var(--muted);
+}
+.contact-form-wrap {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+}
+.form-group {
+  margin-bottom: 1.2rem;
+}
+.form-group label {
+  display: block;
+  font-size: .85rem;
+  font-weight: 600;
+  margin-bottom: .4rem;
+  color: var(--ink);
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%;
+  padding: .8rem 1rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9rem;
+  color: var(--ink);
+  background: var(--surface);
+  transition: .2s;
+  outline: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--accent);
+  background: #fff;
+}
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+}
+.form-success.visible {
+  display: block !important;
+}
+.form-success-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.form-success h3 {
+  margin-bottom: .5rem;
+}
+.form-success p {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+
+/* ── RESPONSIVE MEDIA QUERIES ── */
+@media(max-width: 900px) {
+  .why-grid, .about-story, .contact-grid, .case-card, .service-row {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .service-row.reverse {
+    direction: ltr;
+  }
+  .case-card {
+    display: block;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero-stats {
+    gap: 2rem;
+  }
+}
+
+@media(max-width: 640px) {
+  .nav-links {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav id="mainNav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-dot"></span>Rank<span style="color:var(--accent)">Overflow</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-page="home">Home</a>
+      <a href="services.html" data-page="services">Services</a>
+      <a href="casestudies.html" data-page="casestudies">Case Studies</a>
+      <a href="about.html" data-page="about">About Us</a>
+      <a href="contact.html" data-page="contact" class="active active">Contact</a>
+      <a href="score.html" data-page="score" class="nav-cta">Get My Score →</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-page="home" onclick="toggleMenu()">Home</a>
+    <a href="services.html" data-page="services" onclick="toggleMenu()">Services</a>
+    <a href="casestudies.html" data-page="casestudies" onclick="toggleMenu()">Case Studies</a>
+    <a href="about.html" data-page="about" onclick="toggleMenu()">About Us</a>
+    <a href="contact.html" data-page="contact" class="active active" onclick="toggleMenu()">Contact</a>
+    <a href="score.html" data-page="score" onclick="toggleMenu()" style="color:var(--accent);font-weight:700;">Get My Score →</a>
+  </div>
+
+  <!-- ═══════════ DYNAMIC CONTENT HOLDER ═══════════ -->
+  <main id="content">
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="tag">Contact Us</span>
+    <h1>Let's Talk About Your Growth</h1>
+    <p>Tell us about your business and we'll put together a custom SEO game plan. No sales pressure — just a real conversation.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="tag">Get In Touch</span>
+        <h2>We Respond Within 24 Hours</h2>
+        <p>Whether you're ready to start or just have questions, our team is here to help you find the right path forward.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📍</div>
+            <div class="contact-detail-text"><strong>Office</strong><span>Blue Area, Islamabad, Pakistan</span></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📧</div>
+            <div class="contact-detail-text"><strong>Email</strong><span>hello@rankoverflow.com</span></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📞</div>
+            <div class="contact-detail-text"><strong>Phone / WhatsApp</strong><span>+92 300 1234567</span></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">🕐</div>
+            <div class="contact-detail-text"><strong>Working Hours</strong><span>Mon–Fri, 9AM–6PM PKT</span></div>
+          </div>
+        </div>
+        <div style="margin-top:2.5rem; padding:1.5rem; background:rgba(255,77,28,.06); border:1px solid rgba(255,77,28,.15); border-radius:16px;">
+          <div style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:.5rem;">Want a Free Audit First?</div>
+          <p style="font-size:.88rem; color:var(--muted); margin-bottom:1rem;">Get your Website Performance Score before we talk — it makes the conversation much more productive.</p>
+          <a href="score.html" class="btn btn-primary" onclick="showPage('score')">Get My Free Score →</a>
+        </div>
+      </div>
+      <div class="contact-form-wrap">
+        <h2 style="margin-bottom:.5rem;">Send Us a Message</h2>
+        <p style="color:var(--muted);margin-bottom:1.5rem; font-size:.9rem;">Fill in the form and a senior strategist will reach out personally.</p>
+        <div id="contactFormWrapper">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="Ahmed">
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Khan">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Business Email</label>
+            <input type="email" placeholder="ahmed@company.com">
+          </div>
+          <div class="form-group">
+            <label>Website URL</label>
+            <input type="url" placeholder="https://yourwebsite.com">
+          </div>
+          <div class="form-group">
+            <label>Monthly SEO Budget</label>
+            <select>
+              <option value="">Select a range...</option>
+              <option>Under $500/mo</option>
+              <option>$500 – $1,000/mo</option>
+              <option>$1,000 – $2,000/mo</option>
+              <option>$2,000 – $5,000/mo</option>
+              <option>$5,000+/mo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>What's your main goal?</label>
+            <textarea placeholder="Tell us about your business, current SEO challenges, and what you're hoping to achieve..."></textarea>
+          </div>
+          <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" onclick="submitContact()">Send Message →</button>
+        </div>
+        <div class="form-success" id="contactSuccess">
+          <div class="form-success-icon">✅</div>
+          <h3>Message Received!</h3>
+          <p>Thank you for reaching out. A senior strategist from Rank Overflow will reply to your email within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo"><span style="color:var(--accent);margin-right:2px">●</span> Rank<span style="color:var(--accent)">Overflow</span></div>
+          <p class="footer-desc">Europe's results-driven SEO agency. We help businesses rank higher, grow faster, and win more customers through organic search.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="services.html" >Technical SEO</a></li>
+            <li><a href="services.html" >Content Strategy</a></li>
+            <li><a href="services.html" >Link Building</a></li>
+            <li><a href="services.html" >Local SEO</a></li>
+            <li><a href="services.html" >E-commerce SEO</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html" >About Us</a></li>
+            <li><a href="casestudies.html" >Case Studies</a></li>
+            <li><a href="contact.html" >Contact</a></li>
+            <li><a href="score.html" >Get My Score</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:hello@rankoverflow.com">hello@rankoverflow.com</a></li>
+            <li><a href="tel:+923001234567">+92 300 1234567</a></li>
+            <li><a href="contact.html" >Blue Area, Islamabad</a></li>
+          </ul>
+          <div style="margin-top:1.5rem">
+            <a href="score.html" class="btn btn-primary" >Get Free Score</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Rank Overflow. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social">in</a>
+          <a href="#" class="footer-social">𝕏</a>
+          <a href="#" class="footer-social">f</a>
+          <a href="#" class="footer-social">▶</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SPA Router Script -->
+  <script>
+
+// Hamburger menu toggle
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  if (menu) {
+    menu.classList.toggle('open');
+  }
+}
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('mainNav');
+  if (nav) {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }
+});
+
+// Fade ups on scroll
+function initFadeUps() {
+  setTimeout(() => {
+    const els = document.querySelectorAll('#content .fade-up');
+    if (els.length === 0) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    els.forEach(el => observer.observe(el));
+  }, 100);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initFadeUps();
+});
+
+
+
+function submitContact() {
+  const wrapper = document.getElementById('contactFormWrapper');
+  const success = document.getElementById('contactSuccess');
+  if (wrapper) wrapper.style.display = 'none';
+  if (success) success.classList.add('visible');
+}
+
+</script>
+</body>
+</html>
